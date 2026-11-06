@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>« La reconnaissance au travail » · GRH</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;700&display=swap">
+<style>
+:root{--bg:#FDE2E4;--fg:#2A2B3C;--sf:'DM Serif Display',Georgia,serif;--sn:'DM Sans',system-ui,sans-serif;--e:cubic-bezier(.65,0,.2,1)}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%;overflow:hidden}
+body{background:var(--bg);color:var(--fg);font:400 clamp(14px,1.45vw,21px)/1.5 var(--sn);transition:background 1.1s var(--e),color 1.1s var(--e);cursor:pointer}
+.w{position:relative}.w>h2{max-width:74%}.il{position:absolute;right:0;top:-9vh;width:min(12vw,19vh);height:auto;stroke:currentColor;stroke-width:2.4;stroke-linejoin:round;stroke-linecap:round;fill:none}.il.big{width:min(30vw,46vh);top:-6vh}
+.o{position:fixed;border-radius:50%;filter:blur(70px);opacity:.7;width:46vw;height:46vw;transition:all 1.8s var(--e);z-index:0}
+
+.s{position:absolute;inset:0;z-index:1;display:flex;align-items:center;padding:6vh 8vw;opacity:0;visibility:hidden;transform:translateX(9vw);filter:blur(10px);transition:opacity .8s,transform .9s var(--e),filter .8s,visibility 0s .9s}
+.s.pv{transform:translateX(-9vw)}
+.s.act{opacity:1;visibility:visible;transform:none;filter:none;transition:opacity .9s .3s,transform 1s .3s var(--e),filter .9s .3s,visibility 0s}
+.w{width:100%;max-width:1150px;margin:auto;display:flex;flex-direction:column;gap:3.2vh}
+.r{opacity:0;transform:translateY(30px);transition:opacity .6s,transform .6s}
+.act .r{opacity:1;transform:none;transition:opacity 1s calc(.55s + var(--i)*.13s),transform 1.1s calc(.55s + var(--i)*.13s) cubic-bezier(.2,.7,.2,1)}
+h1,h2{font:400 clamp(30px,4.8vw,70px)/1.08 var(--sf)}
+h1{font-size:clamp(36px,6vw,88px)}
+h3{font-weight:700;font-size:1.12em}
+.mu{color:color-mix(in srgb,currentColor 64%,transparent)}
+.q{font:400 clamp(18px,2.4vw,34px)/1.25 var(--sf);max-width:30em}
+.g{display:grid;grid-template-columns:repeat(var(--n,3),1fr);gap:2.4vw}
+.it{border-top:1.5px solid currentColor;padding-top:1.6vh;display:flex;flex-direction:column;gap:.7vh}
+.it p{color:color-mix(in srgb,currentColor 68%,transparent);font-size:.94em}
+.ic{width:2.1em;height:2.1em;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;margin-bottom:.6vh}
+.st{font:400 clamp(44px,6.4vw,96px)/1 var(--sf)}
+.lb{display:inline-block;padding:2px 14px;border:1.5px solid currentColor;border-radius:99px;font-size:.85em;font-weight:500}
+.bw{display:grid;grid-template-columns:minmax(130px,25%) 1fr;gap:1.4vh 1.6vw;align-items:center}
+.b{height:1.9em;border-radius:99px;background:color-mix(in srgb,currentColor 11%,transparent);overflow:hidden}
+.b i{display:block;height:100%;width:0;border-radius:99px;background:currentColor;color:var(--bg);font:700 .8em/1.9em var(--sn);padding-left:14px;transition:width 1.6s var(--e)}
+.act .b i{width:var(--v);transition-delay:1s}
+.row{display:flex;gap:3vw;align-items:baseline;border-top:1.5px solid currentColor;padding-top:1.4vh}
+.row b{font:400 clamp(26px,3.6vw,52px)/1 var(--sf);min-width:2.2em}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:3vw}
+.vs>div{border-radius:22px;padding:2.6vh 2vw;background:rgba(255,255,255,.62)}
+.cy circle,.cy path{fill:none;stroke:currentColor;stroke-width:1.5}
+.cy .rg{stroke-dasharray:1000;stroke-dashoffset:1000;transition:stroke-dashoffset 2.4s var(--e) 1s}
+.act .cy .rg{stroke-dashoffset:0}
+.cy text{fill:currentColor;font:500 15px var(--sn);text-anchor:middle}
+#pg{position:fixed;left:0;bottom:0;height:4px;background:currentColor;width:0;transition:width 1s var(--e);z-index:9}
+#hud{position:fixed;left:8vw;right:8vw;top:3vh;display:flex;justify-content:space-between;font-size:.8em;z-index:9;pointer-events:none}
+#hint{position:fixed;bottom:3.4vh;left:0;right:0;text-align:center;font-size:.8em;z-index:9;transition:opacity .8s;pointer-events:none}
+@media(max-width:760px){.il{display:none}.g,.vs{grid-template-columns:1fr}.s{overflow:auto;align-items:flex-start}}
+@media(prefers-reduced-motion:reduce){*{transition-duration:.01s!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs>
+<symbol id="user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></symbol>
+<symbol id="users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><circle cx="17" cy="9" r="2.8"/><path d="M2 20c0-3.6 3-6 7-6s7 2.4 7 6M16 14c3.5 0 6 2 6 5"/></symbol>
+<symbol id="key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M16 7l3 3"/></symbol>
+<symbol id="tg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+<symbol id="ht" viewBox="0 0 24 24"><path d="M12 21s-8-5-8-11a4.5 4.5 0 018-3 4.5 4.5 0 018 3c0 6-8 11-8 11z"/></symbol>
+<symbol id="sc" viewBox="0 0 24 24"><path d="M12 3v18M6 21h12M3 7h18M6 7l-3 7h6zM18 7l-3 7h6z"/></symbol>
+<symbol id="ch" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></symbol>
+<symbol id="wa" viewBox="0 0 24 24"><path d="M12 3l10 18H2zM12 10v5M12 18v.5"/></symbol>
+<symbol id="i-tro" viewBox="0 0 120 120"><path d="M38 20h44v26a22 22 0 01-44 0z" fill="#FBE08A"/><path d="M38 28H24c0 14 6 22 16 24M82 28h14c0 14-6 22-16 24M60 68v16"/><path d="M48 84h24v16H48zM42 106h36" fill="#FBC08A"/></symbol><symbol id="i-bub" viewBox="0 0 120 120"><path d="M8 12h62a8 8 0 018 8v26a8 8 0 01-8 8H36L22 68V54H8a8 8 0 01-8-8V20a8 8 0 018-8z" fill="#F9B4C4"/><path d="M50 52h62a8 8 0 018 8v26a8 8 0 01-8 8h-8v14L84 94H50a8 8 0 01-8-8V60a8 8 0 018-8z" fill="#fff"/><path d="M80 86s-9-5-9-11a4.5 4.5 0 019-2 4.5 4.5 0 019 2c0 6-9 11-9 11z" fill="#F9B4C4"/></symbol><symbol id="i-flg" viewBox="0 0 120 120"><path d="M30 108V14"/><path d="M30 18h62l-14 20 14 20H30z" fill="#FBC08A"/></symbol><symbol id="i-mag" viewBox="0 0 120 120"><circle cx="50" cy="50" r="32" fill="#fff"/><circle cx="50" cy="50" r="21" fill="#A9CDF0"/><path d="M74 74l30 30"/></symbol><symbol id="i-gft" viewBox="0 0 120 120"><rect x="18" y="48" width="84" height="58" rx="6" fill="#F9B4C4"/><rect x="12" y="34" width="96" height="20" rx="6" fill="#fff"/><path d="M60 34v72"/><path d="M60 34C46 10 26 18 38 32zM60 34c14-24 34-16 22-2z" fill="#FBE08A"/></symbol><symbol id="i-scl" viewBox="0 0 120 120"><path d="M60 16v88M36 108h48M20 34h80"/><path d="M26 34L10 70h32z" fill="#B5E3C8"/><path d="M94 34L78 70h32z" fill="#FBE08A"/></symbol><symbol id="i-tgt" viewBox="0 0 120 120"><circle cx="60" cy="64" r="44" fill="#fff"/><circle cx="60" cy="64" r="28" fill="#F9B4C4"/><circle cx="60" cy="64" r="12" fill="#FBE08A"/><path d="M60 64L100 24M88 22l14-2-2 14"/></symbol><symbol id="i-grp" viewBox="0 0 120 120"><circle cx="60" cy="38" r="16" fill="#FBE08A"/><path d="M30 104c0-22 14-34 30-34s30 12 30 34z" fill="#fff"/><circle cx="22" cy="54" r="11" fill="#F9B4C4"/><path d="M4 104c0-14 8-24 18-24"/><circle cx="98" cy="54" r="11" fill="#A9CDF0"/><path d="M116 104c0-14-8-24-18-24"/></symbol><symbol id="i-cht" viewBox="0 0 120 120"><rect x="12" y="66" width="20" height="40" fill="#FBE08A"/><rect x="44" y="44" width="20" height="62" fill="#F9B4C4"/><rect x="76" y="26" width="20" height="80" fill="#B5E3C8"/><path d="M6 110h108M16 50l28-18 24 4 30-22M86 12h14v14"/></symbol><symbol id="i-hrt" viewBox="0 0 120 120"><path d="M60 106S10 76 10 40a24 24 0 0150-12 24 24 0 0150 12c0 36-50 66-50 66z" fill="#F9B4C4"/><path d="M22 62h22l8-14 10 24 8-10h28"/></symbol><symbol id="i-bat" viewBox="0 0 120 120"><rect x="10" y="38" width="88" height="46" rx="8" fill="#fff"/><path d="M98 52h10v18H98z" fill="#fff"/><rect x="17" y="45" width="16" height="32" rx="3" fill="#FBC08A"/></symbol><symbol id="i-wrn" viewBox="0 0 120 120"><path d="M60 12l50 92H10z" fill="#FBE08A"/><path d="M60 44v30M60 86v2"/></symbol><symbol id="i-key" viewBox="0 0 120 120"><circle cx="38" cy="78" r="24" fill="#FBE08A"/><circle cx="38" cy="78" r="8" fill="#fff"/><path d="M56 62l46-46M84 34l14 14M94 24l10 10"/></symbol><symbol id="i-blb" viewBox="0 0 120 120"><path d="M60 12a32 32 0 0120 57c-6 5-8 10-8 17H48c0-7-2-12-8-17A32 32 0 0160 12z" fill="#FBE08A"/><path d="M50 98h20M52 108h16"/></symbol><symbol id="i-clp" viewBox="0 0 120 120"><rect x="22" y="20" width="76" height="90" rx="8" fill="#fff"/><rect x="42" y="10" width="36" height="20" rx="6" fill="#A9CDF0"/><path d="M36 56h48M36 74h48M36 92h28"/></symbol><symbol id="i-pln" viewBox="0 0 120 120"><path d="M40 78h40l-6 30H46z" fill="#FBC08A"/><path d="M60 78V40"/><path d="M60 62C40 62 34 46 34 34c14 0 26 8 26 28z" fill="#B5E3C8"/><path d="M60 52c0-18 12-28 28-28 0 16-10 28-28 28z" fill="#B5E3C8"/></symbol></defs></svg>
+<div class="o" id="o1"></div><div class="o" id="o2"></div>
+<div id="hud"><span id="part"></span><span id="cnt"></span></div>
+<div id="hint" class="mu">Cliquer ou faire défiler pour continuer</div>
+<div id="pg"></div>
+
+<section class="s" data-c="b s"><div class="w"><svg class="il big r"><use href="#i-tro"/></svg>
+<h1 class="r">« La reconnaissance<br>au travail »</h1>
+<p class="q r">Comment concilier motivation, bien-être et performance ?</p>
+<p class="mu r">Gestion des ressources humaines · Oral de groupe</p></div></section>
+
+<section class="s" data-c="y r" data-p="Introduction"><div class="w"><svg class="il r"><use href="#i-bub"/></svg>
+<h2 class="r">Bien plus qu’un « merci » ou une prime</h2>
+<div class="g">
+<div class="it r"><svg class="ic"><use href="#users"/></svg><h3>Un sujet qui nous concerne tous</h3><p>Salariés, stagiaires, futurs managers.</p></div>
+<div class="it r"><svg class="ic"><use href="#ch"/></svg><h3>Un manque ressenti</h3><p>Beaucoup de salariés disent en manquer ; les entreprises avouent la gérer mal.</p></div>
+<div class="it r"><svg class="ic"><use href="#sc"/></svg><h3>Le mot « concilier »</h3><p>Ce qui motive doit aussi préserver la santé et servir la performance.</p></div></div>
+<p class="q r">Comment reconnaître le travail des salariés pour concilier motivation, bien-être et performance ?</p></div></section>
+
+<section class="s" data-c="s p" data-p="Plan"><div class="w"><svg class="il r"><use href="#i-flg"/></svg>
+<h2 class="r">Notre fil rouge</h2>
+<div class="row r"><b>I</b><div><h3>Comprendre</h3><span class="mu">Ce que veut dire « reconnaître » et quelles formes cela prend</span></div></div>
+<div class="row r"><b>II</b><div><h3>Les enjeux</h3><span class="mu">Pour l’entreprise et pour les salariés</span></div></div>
+<div class="row r"><b>III</b><div><h3>Agir</h3><span class="mu">Les pratiques managériales qui fonctionnent</span></div></div>
+<div class="row r"><b>+</b><div><h3>Ouverture</h3><span class="mu">La reconnaissance collective</span></div></div></div></section>
+
+<section class="s" data-c="b y" data-p="I · Comprendre"><div class="w"><svg class="il r"><use href="#i-mag"/></svg>
+<h2 class="r">Définir la reconnaissance</h2>
+<div class="g">
+<div class="it r"><h3>Anact</h3><p>Un échange « qui se joue à plusieurs » : la perception dépend du groupe auquel on appartient.</p></div>
+<div class="it r"><h3>Brun et Dugas</h3><p>Montrer que les réalisations, les pratiques de travail et la personne sont appréciées à leur juste valeur.</p></div>
+<div class="it r"><h3>Marie Capdevielle</h3><p>Rendre l’individu visible et lui donner une valeur sociale.</p></div></div>
+<p class="q r">Reconnaître, c’est identifier, évaluer et récompenser.</p></div></section>
+
+<section class="s" data-c="r y" data-p="I · Comprendre"><div class="w"><svg class="il r"><use href="#i-gft"/></svg>
+<h2 class="r">Reconnaître n’est pas récompenser</h2>
+<div class="vs">
+<div class="r"><svg class="ic"><use href="#key"/></svg><h3>La récompense</h3><p class="mu">Tangible : une prime, une promotion, un avantage.</p></div>
+<div class="r"><svg class="ic"><use href="#ht"/></svg><h3>La reconnaissance</h3><p class="mu">Verbale, relationnelle ou organisationnelle : un merci précis, plus d’autonomie, une responsabilité. Elle agit plus durablement.</p></div></div>
+<p class="q r">Un besoin humain fondamental : son manque fait partie des risques psychosociaux (OMS).</p></div></section>
+
+<section class="s" data-c="s b" data-p="I · Comprendre"><div class="w"><svg class="il r"><use href="#i-scl"/></svg>
+<h2 class="r">Deux conceptions</h2>
+<div class="vs">
+<div class="r"><h3>Axée sur les récompenses</h3><p class="mu">De bonnes gratifications motivent. Limite : un système qui ne répond pas aux attentes est contesté, et s’il veut répondre à toutes, il devient illisible.</p></div>
+<div class="r"><h3>Fondée sur le travail</h3><p class="mu">Objectifs clairs, autonomie, droit à l’erreur : le travail a du sens, les salariés s’engagent et la performance suit.</p></div></div>
+<p class="q r">La plus porteuse d’engagement : celle qui concilie motivation, bien-être et performance.</p></div></section>
+
+<section class="s" data-c="y s" data-p="I · Comprendre · Reconnaître quoi ?"><div class="w"><svg class="il r"><use href="#i-tgt"/></svg>
+<h2 class="r">Quatre formes, de la personne au résultat</h2>
+<div class="g" style="--n:4">
+<div class="it r"><svg class="ic"><use href="#user"/></svg><h3>Existentielle</h3><p>La personne en tant qu’être humain, quel que soit son poste. La base de toutes les autres.</p></div>
+<div class="it r"><svg class="ic"><use href="#tg"/></svg><h3>Pratique de travail</h3><p>Compétences, rigueur, créativité, professionnalisme.</p></div>
+<div class="it r"><svg class="ic"><use href="#ht"/></svg><h3>Investissement</h3><p>Les efforts, même sans résultat. La plus souvent oubliée.</p></div>
+<div class="it r"><svg class="ic"><use href="#ch"/></svg><h3>Résultats</h3><p>La plus pratiquée en entreprise, mais elle ne suffit pas.</p></div></div></div></section>
+
+<section class="s" data-c="b r" data-p="I · Comprendre · Reconnaître par qui ?"><div class="w"><svg class="il r"><use href="#i-grp"/></svg>
+<h2 class="r">La proximité compte</h2>
+<p class="mu r">Sources de reconnaissance citées · enquête 2016, 423 décideurs et responsables RH</p>
+<div class="bw r">
+<span>Collègues du service</span><div class="b"><i style="--v:72%">72 %</i></div>
+<span>Client et manager</span><div class="b"><i style="--v:68%">68 %</i></div>
+<span>Collègues d’autres services</span><div class="b"><i style="--v:55%">55 %</i></div>
+<span>Direction</span><div class="b"><i style="--v:50%">50 %</i></div></div>
+<p class="r"><span class="lb">horizontal</span> <span class="lb">vertical</span> <span class="lb">organisationnel</span></p>
+<p class="mu r">Cabinets comptables : clients = écoute, direction = vendre, collègues = technique. Faute de critères clairs, on ne sait plus sur quoi miser.</p></div></section>
+
+<section class="s" data-c="y p" data-p="I · Comprendre · Reconnaître comment ?"><div class="w"><svg class="il r"><use href="#i-bub"/></svg>
+<h2 class="r">Formelle ou informelle</h2>
+<div class="vs">
+<div class="r"><h3>Formelle</h3><p class="mu">Inscrite dans la politique RH : entretiens, primes, distinctions.</p></div>
+<div class="r"><h3>Informelle</h3><p class="mu">Un merci, un retour sur un travail. Ces gestes du quotidien comptent souvent le plus.</p></div></div>
+<p class="q r">La reconnaissance porte sur la personne, son travail, ses efforts et ses résultats.</p></div></section>
+
+<section class="s" data-c="r b" data-p="II · Les enjeux · Pour l’entreprise"><div class="w"><svg class="il r"><use href="#i-cht"/></svg>
+<h2 class="r">Un enjeu stratégique pour l’entreprise</h2>
+<div class="g" style="--n:4">
+<div class="it r"><svg class="ic"><use href="#wa"/></svg><h3>Sans reconnaissance</h3><p>Démobilisation, mal-être, contre-performance, absentéisme, départs.</p></div>
+<div class="it r"><svg class="ic"><use href="#key"/></svg><h3>Avec reconnaissance</h3><p>L’enjeu n’est plus de recruter, mais de fidéliser.</p></div>
+<div class="it r"><span class="st"><span class="n" data-n="54">54</span> %</span><p>des responsables RH jugent leur politique insatisfaisante.</p></div>
+<div class="it r"><span class="st"><span class="n" data-n="73">73</span> %</span><p>jugent la politique satisfaisante quand le débat est bon en comité de direction.</p></div></div>
+<p class="q r">Mieux on en parle, mieux on reconnaît.</p>
+<p class="mu r">Une compagnie d’assurances a analysé ses primes variables avec salariés et managers avant de les imposer : un système plus proche du travail réel.</p></div></section>
+
+<section class="s" data-c="s y" data-p="II · Les enjeux · Pour les salariés"><div class="w"><svg class="il r"><use href="#i-hrt"/></svg>
+<h2 class="r">Ce que le salarié joue</h2>
+<div class="g">
+<div class="it r"><svg class="ic"><use href="#ht"/></svg><h3>Le bien-être</h3><p>Siegrist : efforts élevés et faibles récompenses mènent au stress, au surinvestissement, puis au burn-out. Être reconnu conforte l’identité professionnelle.</p></div>
+<div class="it r"><svg class="ic"><use href="#sc"/></svg><h3>La justice</h3><p>Un commercial perd un contrat pour une question de budget : si seul le résultat compte, son effort devient invisible.</p></div>
+<div class="it r"><svg class="ic"><use href="#tg"/></svg><h3>Le sens du travail</h3><p>Ce qui compte n’est pas le temps passé, mais le sens donné à l’effort.</p></div></div>
+<p class="mu r">Les bas salaires préfèrent souvent une hausse de rémunération, les hauts salaires plus d’autonomie.</p></div></section>
+
+<section class="s" data-c="b p" data-p="II · Les enjeux · Un cercle vertueux"><div class="w" style="flex-direction:row;align-items:center;gap:5vw">
+<svg class="cy r" viewBox="0 0 400 400" style="width:min(38vw,60vh);flex:none">
+<circle class="rg" cx="200" cy="200" r="130"/>
+<circle cx="200" cy="70" r="9"/><circle cx="330" cy="200" r="9"/><circle cx="200" cy="330" r="9"/><circle cx="70" cy="200" r="9"/>
+<text x="200" y="45">Effort</text><text x="355" y="205" style="text-anchor:start" transform="translate(-30 0)"> </text>
+<text x="200" y="360">Motivation</text><text x="200" y="215" style="font-size:19px">Reconnaissance</text>
+<text x="352" y="170" style="text-anchor:middle">Reconnu</text><text x="48" y="170">Réinvestit</text></svg>
+<div style="display:flex;flex-direction:column;gap:2.4vh"><h2 class="r">Le cercle vertueux</h2>
+<div class="it r"><h3>Motivation</h3><p>Maslow : besoin d’estime. Deci et Ryan : l’autonomie nourrit la motivation intrinsèque, celle qui dure.</p></div>
+<div class="it r"><h3>Satisfaction</h3><p>Herzberg : le salaire évite l’insatisfaction ; la reconnaissance crée la satisfaction.</p></div>
+<div class="it r"><h3>Productivité</h3><p>Des salariés valorisés sont plus proactifs, coopératifs et innovants.</p></div></div></div></section>
+
+<section class="s" data-c="y s" data-p="II · Les enjeux · L’engagement"><div class="w"><svg class="il r"><use href="#i-bat"/></svg>
+<h2 class="r">En France, seuls <span class="n" data-n="8">8</span> % des salariés se disent engagés</h2>
+<p class="mu r">Part des salariés engagés dans leur travail · Gallup</p>
+<div class="bw r">
+<span>France</span><div class="b"><i style="--v:8%">8 %</i></div>
+<span>Europe</span><div class="b"><i style="--v:12%">12 %</i></div>
+<span>Monde</span><div class="b"><i style="--v:20%">20 %</i></div></div>
+<p class="q r">Sans reconnaissance, le cercle s’inverse : c’est le « quiet quitting ».</p></div></section>
+
+<section class="s" data-c="r p" data-p="II · Les enjeux · Les effets pervers"><div class="w"><svg class="il r"><use href="#i-wrn"/></svg>
+<h2 class="r">Attention aux effets pervers</h2>
+<div class="vs">
+<div class="r"><svg class="ic"><use href="#wa"/></svg><h3>Que des résultats individuels</h3><p class="mu">Les salariés ne font plus que ce qui est mesuré et récompensé. La quantité l’emporte sur la qualité.</p></div>
+<div class="r"><svg class="ic"><use href="#wa"/></svg><h3>Tout miser sur les résultats</h3><p class="mu">Sans tenir compte de l’effort ni donner d’autonomie : stress, fatigue, absentéisme.</p></div></div>
+<p class="q r">La manière de reconnaître est décisive.</p></div></section>
+
+<section class="s" data-c="b s" data-p="III · Agir · Le manager de proximité"><div class="w"><svg class="il r"><use href="#i-key"/></svg>
+<h2 class="r">Le manager de proximité, en trois verbes</h2>
+<div class="g">
+<div class="it r"><svg class="ic"><use href="#user"/></svg><h3>Identifier</h3><p>La personne dans sa singularité, sans favoritisme.</p></div>
+<div class="it r"><svg class="ic"><use href="#sc"/></svg><h3>Évaluer</h3><p>Avec des critères clairs, selon les contraintes du poste.</p></div>
+<div class="it r"><svg class="ic"><use href="#key"/></svg><h3>Récompenser</h3><p>Pas seulement par la prime : déléguer, former, féliciter.</p></div></div>
+<p class="r"><span class="lb">sincère</span> <span class="lb">rapide</span> <span class="lb">précise</span> <span class="lb">personnalisée</span></p>
+<p class="q r">« Merci d’avoir repris le dossier en urgence hier soir : grâce à toi, le client a eu sa réponse à temps. »</p>
+<p class="mu r">Plutôt que « Merci pour ton travail » : seule cette phrase montre qu’on a vraiment vu le travail.</p></div></section>
+
+<section class="s" data-c="y b" data-p="III · Agir · Par le travail et au quotidien"><div class="w"><svg class="il r"><use href="#i-blb"/></svg>
+<h2 class="r">Quatre leviers (Anact)</h2>
+<div class="g" style="--n:4">
+<div class="it r"><svg class="ic"><use href="#key"/></svg><h3>Autonomie</h3><p>Le signe de confiance le plus fort.</p></div>
+<div class="it r"><svg class="ic"><use href="#ch"/></svg><h3>Activité variée</h3><p>Plusieurs compétences, formation.</p></div>
+<div class="it r"><svg class="ic"><use href="#users"/></svg><h3>Activité globale</h3><p>Maîtriser une tâche complète.</p></div>
+<div class="it r"><svg class="ic"><use href="#tg"/></svg><h3>Finalité visible</h3><p>Voir l’impact réel de son travail.</p></div></div>
+<p class="mu r">Au quotidien : un feedback constructif, un merci précis, un tour des réussites de la semaine, la reconnaissance entre collègues. Chacun a ses préférences : paroles, petites attentions, autonomie ou présence du manager. Tout le défi est de personnaliser.</p></div></section>
+
+<section class="s" data-c="r s" data-p="III · Agir · L’évaluation et les pièges"><div class="w"><svg class="il r"><use href="#i-clp"/></svg>
+<h2 class="r">L’entretien d’évaluation et les pièges</h2>
+<div class="vs">
+<div class="r"><h3>Un entretien qui reconnaît</h3><p class="mu">Transparent, simple, recentré sur le travail réel. Managers formés, représentants du personnel consultés.</p></div>
+<div class="r"><h3>Les pièges</h3><p class="mu">Que les résultats ; tout ramener à la rémunération ; l’individu avant le collectif ; vouloir tout reconnaître. Le manager aussi a besoin d’être reconnu.</p></div></div>
+<div class="bw r"><span>Reconnaissent surtout les résultats</span><div class="b"><i style="--v:78%">78 %</i></div><span>Reconnaissent l’effort</span><div class="b"><i style="--v:46%">46 %</i></div></div>
+<p class="mu r">Part des responsables RH décrivant leur entreprise.</p></div></section>
+
+<section class="s" data-c="s b" data-p="Ouverture · La reconnaissance collective"><div class="w"><svg class="il r"><use href="#i-grp"/></svg>
+<h2 class="r">Reconnaître aussi le collectif</h2>
+<p class="mu r">Télétravail et solitude : 18 % des salariés français ont ressenti beaucoup de solitude la veille, contre 13 % en Europe.</p>
+<p class="r"><span class="lb">Cas réel · métallurgie en restructuration</span></p>
+<div class="g">
+<div class="it r"><svg class="ic"><use href="#users"/></svg><h3>Salaire lié à la formation entre pairs</h3><p>La plus forte adhésion.</p></div>
+<div class="it r"><svg class="ic"><use href="#ht"/></svg><h3>Prime d’équipe</h3><p>Jugée légitime.</p></div>
+<div class="it r"><svg class="ic"><use href="#wa"/></svg><h3>Points individuels pour quelques-uns</h3><p>Méfiance et tensions.</p></div></div>
+<p class="q r">Les mécanismes solidaires convainquent, la compétition individuelle inquiète.</p></div></section>
+
+<section class="s" data-c="y b" data-p="Conclusion"><div class="w"><svg class="il r"><use href="#i-pln"/></svg>
+<h2 class="r">Ce qu’il faut retenir</h2>
+<div class="g">
+<div class="it r"><h3>Reconnaître n’est pas récompenser</h3><p>On reconnaît la personne, sa façon de travailler, ses efforts et ses résultats.</p></div>
+<div class="it r"><h3>Bien reconnaître profite aux deux</h3><p>Salariés : motivation, sens, santé. Entreprise : engagement, qualité, fidélisation.</p></div>
+<div class="it r"><h3>Le manager est central</h3><p>Une reconnaissance rapide, précise et sincère, par l’autonomie, le contenu du travail et le collectif.</p></div></div></div></section>
+
+<section class="s" data-c="r y" data-p="Question à la salle"><div class="w"><svg class="il r"><use href="#i-bub"/></svg>
+<h2 class="r">Si demain votre manager voulait vous remercier, vous préféreriez…</h2>
+<div class="vs"><div class="r"><div class="st">Une prime</div><p class="mu">Levez la main.</p></div><div class="r"><div class="st">Plus d’autonomie</div><p class="mu">Levez la main.</p></div></div>
+<p class="mu r">Chacun a son propre « langage » de reconnaissance.</p></div></section>
+
+<section class="s" data-c="b s"><div class="w"><svg class="il big r"><use href="#i-tro"/></svg>
+<h1 class="r">Merci de votre attention</h1>
+<p class="q r">Nous sommes prêts à répondre à vos questions.</p></div></section>
+
+<script>
+const S=[...document.querySelectorAll('.s')],BG=['#FDE2E4','#FFF1BF','#FFE1C8'],OR=['#F9B4C4','#FBE08A','#FBC08A','#B5E3C8','#A9CDF0'];
+let i=-1,lock=false;
+S.forEach(s=>s.querySelectorAll('.r').forEach((e,k)=>e.style.setProperty('--i',k)));
+function count(s){s.querySelectorAll('.n').forEach(n=>{const t=+n.dataset.n,t0=performance.now()+900;
+ (function f(now){const p=Math.min(1,Math.max(0,(now-t0)/1500));n.textContent=Math.round(t*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(performance.now())})}
+function go(n){
+ n=Math.max(0,Math.min(S.length-1,n));if(n===i)return;i=n;
+ S.forEach((s,k)=>{s.classList.toggle('act',k===i);s.classList.toggle('pv',k<i)});
+ const s=S[i];
+ document.body.style.setProperty('--bg',BG[i%3]);
+ const a=document.getElementById('o1'),b=document.getElementById('o2');
+ a.style.background=OR[(i+1)%5];b.style.background=OR[(i+3)%5];
+ a.style.left=(40+(i*29)%50)+'vw';a.style.top=((i*17)%40-25)+'vh';
+ b.style.left=((i*23)%40-15)+'vw';b.style.top=(50+(i*13)%35)+'vh';
+ document.getElementById('part').textContent=s.dataset.p||'';
+ document.getElementById('cnt').textContent=(i+1)+' / '+S.length;
+ document.getElementById('pg').style.width=((i+1)/S.length*100)+'%';
+ document.getElementById('hint').style.opacity=i===0?.8:0;
+ count(s);
+ try{history.replaceState(null,'','#'+(i+1))}catch(e){}
+}
+addEventListener('click',e=>go(i+(e.clientX<innerWidth*.18?-1:1)));
+addEventListener('wheel',e=>{if(lock||Math.abs(e.deltaY)<10)return;lock=true;go(i+(e.deltaY>0?1:-1));setTimeout(()=>lock=false,1200)},{passive:true});
+addEventListener('keydown',e=>{
+ if(['ArrowRight','ArrowDown','PageDown',' ','Enter'].includes(e.key)){e.preventDefault();go(i+1)}
+ if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();go(i-1)}});
+let y0;addEventListener('touchstart',e=>y0=e.touches[0].clientX,{passive:true});
+addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-y0;if(Math.abs(d)>50)go(i+(d<0?1:-1))},{passive:true});
+go((parseInt(location.hash.slice(1))||1)-1);
+</script>
+</body>
+</html>
