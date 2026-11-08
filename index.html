@@ -32,7 +32,7 @@ h3{font-weight:700;font-size:1.12em}
 .lb{display:inline-block;padding:2px 14px;border:1.5px solid currentColor;border-radius:99px;font-size:.85em;font-weight:500}
 .bw{display:grid;grid-template-columns:minmax(130px,25%) 1fr;gap:1.4vh 1.6vw;align-items:center}
 .b{height:1.9em;border-radius:99px;background:color-mix(in srgb,currentColor 11%,transparent);overflow:hidden}
-.b i{display:block;height:100%;width:0;border-radius:99px;background:currentColor;color:var(--bg);font:700 .8em/1.9em var(--sn);padding-left:14px;transition:width 1.6s var(--e)}
+.b i{display:block;height:100%;width:0;min-width:3.4em;white-space:nowrap;border-radius:99px;background:var(--fg);color:#fff;font:700 .8em/1.9em var(--sn);padding-left:14px;transition:width 1.6s var(--e)}
 .act .b i{width:var(--v);transition-delay:1s}
 .row{display:flex;gap:3vw;align-items:baseline;border-top:1.5px solid currentColor;padding-top:1.4vh}
 .row b{font:400 clamp(26px,3.6vw,52px)/1 var(--sf);min-width:2.2em}
@@ -41,6 +41,12 @@ h3{font-weight:700;font-size:1.12em}
 .cy circle,.cy path{fill:none;stroke:currentColor;stroke-width:1.5}
 .cy .rg{stroke-dasharray:1000;stroke-dashoffset:1000;transition:stroke-dashoffset 2.4s var(--e) 1s}
 .act .cy .rg{stroke-dashoffset:0}
+.py polygon{fill:color-mix(in srgb,currentColor 7%,transparent);stroke:currentColor;stroke-width:1.5;stroke-linejoin:round}
+.py .hl{fill:currentColor}
+.py text{fill:currentColor;font:500 16px var(--sn)}
+.py .nb{text-anchor:middle;font:700 15px var(--sn)}
+.py .nb.hl{fill:var(--bg)}
+.py .lbl.hl{font-weight:700;fill:currentColor}
 .cy text{fill:currentColor;font:500 15px var(--sn);text-anchor:middle}
 #pg{position:fixed;left:0;bottom:0;height:4px;background:currentColor;width:0;transition:width 1s var(--e);z-index:9}
 #hud{position:fixed;left:8vw;right:8vw;top:3vh;display:flex;justify-content:space-between;font-size:.8em;z-index:9;pointer-events:none}
@@ -158,10 +164,24 @@ h3{font-weight:700;font-size:1.12em}
 <text x="200" y="45">Effort</text><text x="355" y="205" style="text-anchor:start" transform="translate(-30 0)"> </text>
 <text x="200" y="360">Motivation</text><text x="200" y="215" style="font-size:19px">Reconnaissance</text>
 <text x="352" y="170" style="text-anchor:middle">Reconnu</text><text x="48" y="170">Réinvestit</text></svg>
-<div style="display:flex;flex-direction:column;gap:2.4vh"><h2 class="r">Le cercle vertueux</h2>
-<div class="it r"><h3>Motivation</h3><p>Maslow : besoin d’estime. Deci et Ryan : l’autonomie nourrit la motivation intrinsèque, celle qui dure.</p></div>
-<div class="it r"><h3>Satisfaction</h3><p>Herzberg : le salaire évite l’insatisfaction ; la reconnaissance crée la satisfaction.</p></div>
-<div class="it r"><h3>Productivité</h3><p>Des salariés valorisés sont plus proactifs, coopératifs et innovants.</p></div></div></div></section>
+<h2 class="r">Le cercle vertueux</h2></div></section>
+
+<section class="s" data-c="s y" data-p="II · Les enjeux · La motivation"><div class="w" style="flex-direction:row;align-items:center;gap:5vw">
+<div style="display:flex;flex-direction:column;gap:2.4vh;flex:1"><h2 class="r">Motivation</h2>
+<div class="it r"><p style="font-size:1.1em">Maslow : besoin d’estime. Deci et Ryan : l’autonomie nourrit la motivation intrinsèque, celle qui dure.</p></div></div>
+<svg class="py r" viewBox="0 0 500 330" style="width:min(48vw,72vh);flex:none" role="img" aria-label="Pyramide de Maslow : besoins physiologiques, sécurité, appartenance, estime, accomplissement de soi">
+<polygon points="140,10 166,72 114,72"/>
+<polygon class="hl" points="114,72 166,72 192,134 88,134"/>
+<polygon points="88,134 192,134 218,196 62,196"/>
+<polygon points="62,196 218,196 244,258 36,258"/>
+<polygon points="36,258 244,258 270,320 10,320"/>
+<text class="nb" x="140" y="58">5</text><text class="nb hl" x="140" y="110">4</text><text class="nb" x="140" y="172">3</text><text class="nb" x="140" y="234">2</text><text class="nb" x="140" y="296">1</text>
+<text class="lbl" x="296" y="46">Accomplissement de soi</text>
+<text class="lbl hl" x="296" y="108">Estime</text>
+<text class="lbl" x="296" y="170">Appartenance</text>
+<text class="lbl" x="296" y="232">Sécurité</text>
+<text class="lbl" x="296" y="294">Besoins physiologiques</text>
+</svg></div></section>
 
 <section class="s" data-c="y s" data-p="II · Les enjeux · L’engagement"><div class="w"><svg class="il r"><use href="#i-bat"/></svg>
 <h2 class="r">En France, seuls <span class="n" data-n="8">8</span> % des salariés se disent engagés</h2>
@@ -171,6 +191,11 @@ h3{font-weight:700;font-size:1.12em}
 <span>Europe</span><div class="b"><i style="--v:12%">12 %</i></div>
 <span>Monde</span><div class="b"><i style="--v:20%">20 %</i></div></div>
 <p class="q r">Sans reconnaissance, le cercle s’inverse : c’est le « quiet quitting ».</p></div></section>
+
+<section class="s" data-c="b y" data-p="II · Les enjeux · Satisfaction et productivité"><div class="w">
+<div class="vs">
+<div class="r"><svg class="ic"><use href="#ht"/></svg><h3>Satisfaction</h3><p class="mu">Herzberg : le salaire évite l’insatisfaction ; la reconnaissance crée la satisfaction.</p></div>
+<div class="r"><svg class="ic"><use href="#ch"/></svg><h3>Productivité</h3><p class="mu">Des salariés valorisés sont plus proactifs, coopératifs et innovants.</p></div></div></div></section>
 
 <section class="s" data-c="r p" data-p="II · Les enjeux · Les effets pervers"><div class="w"><svg class="il r"><use href="#i-wrn"/></svg>
 <h2 class="r">Attention aux effets pervers</h2>
